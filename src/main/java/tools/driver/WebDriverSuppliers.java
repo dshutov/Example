@@ -25,18 +25,11 @@ class WebDriverSuppliers {
 
     static WebDriver chromeDriver()
     {
-        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-
-        ChromeDriverService service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("src/main/resources/drivers/chrome/VERSION/chromedriver.exe"
-                        .replace("VERSION", PropertiesConfig.getProperty(PropertiesKeys.CHROME_VERSION))))
-                .usingAnyFreePort()
-                .build();
-        final ChromeOptions options = new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("test-type");
         options.addArguments("start-maximized");
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        final WebDriver driver = new ChromeDriver(service, options);
+
+        final WebDriver driver = new ChromeDriver( options);
         driver.manage().window().maximize();
 
         return driver;

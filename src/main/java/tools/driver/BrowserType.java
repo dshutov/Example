@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public enum BrowserType {
-    CHROME("chrome", "chromedriver.exe", "webdriver.chrome.driver", WebDriverSuppliers::chromeDriver),
+    CHROME("chrome", "chrome/VERSION/chromedriver.exe", "webdriver.chrome.driver", WebDriverSuppliers::chromeDriver),
     FIREFOX("firefox", "geckodriver.exe", "webdriver.gecko.driver", WebDriverSuppliers::firefoxDriver);
 
     private final String name;
@@ -27,8 +27,7 @@ public enum BrowserType {
         final File file = new File(classLoader.getResource("drivers").getFile());
 
         this.name = name;
-        this.driverResourcePath = name.equals("chrome") ? file.getAbsolutePath() + "\\" + VERSION_OF_CHROME + "\\" + driverResourcePath
-                : file.getAbsolutePath() + "\\" + driverResourcePath;
+        this.driverResourcePath =  file.getAbsolutePath() + "\\"+ driverResourcePath.replace("VERSION", VERSION_OF_BROWSER);
         this.systemPropertyName = systemPropertyName;
         this.webDriverSupplier = webDriverSupplier;
     }
@@ -53,5 +52,5 @@ public enum BrowserType {
         return webDriverSupplier.get();
     }
 
-    private final String VERSION_OF_CHROME = PropertiesConfig.getProperty(PropertiesKeys.CHROME_VERSION);
+    private final String VERSION_OF_BROWSER = PropertiesConfig.getProperty(PropertiesKeys.BROWSER_VERSION);
 }
