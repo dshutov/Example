@@ -27,7 +27,8 @@ public enum BrowserType {
         final File file = new File(classLoader.getResource("drivers").getFile());
 
         this.name = name;
-        this.driverResourcePath = file.getAbsolutePath() + "\\" + VERSION_OF_CHROME + "\\" + driverResourcePath;
+        this.driverResourcePath = name.equals("chrome") ? file.getAbsolutePath() + "\\" + VERSION_OF_CHROME + "\\" + driverResourcePath
+                : file.getAbsolutePath() + "\\" + driverResourcePath;
         this.systemPropertyName = systemPropertyName;
         this.webDriverSupplier = webDriverSupplier;
     }
