@@ -1,6 +1,8 @@
 package tools.driver;
 
 import org.openqa.selenium.WebDriver;
+import tools.properties.PropertiesConfig;
+import tools.properties.PropertiesKeys;
 
 import java.io.File;
 import java.util.Optional;
@@ -25,7 +27,7 @@ public enum BrowserType {
         final File file = new File(classLoader.getResource("drivers").getFile());
 
         this.name = name;
-        this.driverResourcePath = file.getAbsolutePath()+ "\\" + driverResourcePath;
+        this.driverResourcePath = file.getAbsolutePath() + "\\" + VERSION_OF_CHROME + "\\" + driverResourcePath;
         this.systemPropertyName = systemPropertyName;
         this.webDriverSupplier = webDriverSupplier;
     }
@@ -49,4 +51,6 @@ public enum BrowserType {
     public WebDriver newInstance() {
         return webDriverSupplier.get();
     }
+
+    private final String VERSION_OF_CHROME = PropertiesConfig.getProperty(PropertiesKeys.CHROME_VERSION);
 }

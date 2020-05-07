@@ -30,6 +30,7 @@
     <properties>
         <browser.type>chrome</browser.type>
         <log4j2.version>2.3</log4j2.version>
+        <chrome.version>v83</chrome.version>
     </properties>
 
 
